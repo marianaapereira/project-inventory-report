@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from inventory_report.product import Product
 from typing import List
 import json
+import csv
 
 
 class Importer(ABC):
@@ -37,8 +38,29 @@ class JsonImporter(Importer):
         return product_list
 
 
-class CsvImporter:
-    pass
+class CsvImporter(Importer):
+    def import_data(self) -> List[Product]:
+        with open(self.path, newline='', encoding='utf-8') as csv_file:
+            csv_reader = csv.reader(csv_file)
+            next(csv_reader)
+            data_list = list(csv_reader)
+
+            product_list = []
+
+            for data in data_list:
+                new_product = Product(
+                    data[0],
+                    data[1],
+                    data[2],
+                    data[3],
+                    data[4],
+                    data[5],
+                    data[6]
+                )
+
+                product_list.append(new_product)
+
+            return product_list
 
 
 # Não altere a variável abaixo
