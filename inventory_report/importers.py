@@ -12,7 +12,7 @@ class Importer(ABC):
 
     @abstractmethod
     def import_data(self) -> List[Product]:
-        return ()
+        ...
 
 
 class JsonImporter(Importer):
