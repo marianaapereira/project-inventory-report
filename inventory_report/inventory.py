@@ -4,7 +4,7 @@ from typing import List, Optional
 
 class Inventory:
     def __init__(self, data: Optional[List[Product]] = None) -> None:
-        if data == None:
+        if data is None:
             data = []
 
         self._data = data
